@@ -92,21 +92,49 @@ let Results = (props) => {
       >
         <ScrollView>
           <View style={{ margin: 15, marginTop: 15 }}>
-            <Text style={{ fontSize: 32, color: "white", textAlign: "left" }}>
+            <Text style={{ fontSize: 42, color: "white", textAlign: "left" }}>
               {translate("questions.results")}
             </Text>
 
-            <Text
-              style={{
-                fontSize: 16,
-                color: "white",
-                fontFamily: "CairoBold",
-                textAlign: "left",
-              }}
-            >
-              {translate("questions.correct")}: {correctAnswers} /{" "}
-              {answersLogs.length}
-            </Text>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "white",
+                    fontFamily: "CairoBold",
+                    textAlign: "left",
+                  }}
+                >
+                  {translate("questions.correct")} :
+                </Text>
+              </View>
+              <View style={{ marginHorizontal: 3 }}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "white",
+                    fontFamily: "CairoBold",
+                    textAlign: "left",
+                    color:correctAnswers == answersLogs.length ?theme['color-success-500']:theme['color-warning-500']
+                  }}
+                >
+                  {correctAnswers}
+                </Text>
+              </View>
+              <View style={{ marginHorizontal: 3 }}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: "white",
+                    fontFamily: "CairoBold",
+                    textAlign: "left",
+                  }}
+                >
+                  من {answersLogs.length}
+                </Text>
+              </View>
+            </View>
           </View>
           <View
             style={{

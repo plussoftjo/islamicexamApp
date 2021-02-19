@@ -35,7 +35,7 @@ let ResultsHistory = (props) => {
         }
         <ScrollView showsVerticalScrollIndicator={false}>
         {userResults.map((trg,index) => (
-          <ResultList result={trg} />
+          <ResultList key={index} result={trg} />
         ))}
         </ScrollView>
         

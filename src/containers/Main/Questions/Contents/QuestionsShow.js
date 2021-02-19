@@ -25,7 +25,7 @@ let QuestionsShow = (props) => {
   } = props;
   let [correctAnswer, setCorrectAnswer] = React.useState(null);
   let [notCorrectAnswer, setNotCorrectAnswer] = React.useState(null);
-  let [adsShow,setAdsShow] = React.useState(2)
+  let [adsShow,setAdsShow] = React.useState(3)
 
   let _showAds = async() => {
     await AdMobInterstitial.setAdUnitID(Platform.OS == 'android'? Ads.android.QuestionsAds:Ads.ios.QuestionsAds); // Test ID, Replace with your-admob-unit-id
@@ -36,7 +36,7 @@ let QuestionsShow = (props) => {
   let NextQuestion = () => {
     if(adsShow == 0) {
       _showAds()
-      setAdsShow(4)
+      setAdsShow(5)
     }else {
       setAdsShow(adsShow - 1)
     }
@@ -76,7 +76,7 @@ let QuestionsShow = (props) => {
     setAnswersLogs([...answersLogs, _answerWithQuestion]);
     setTimeout(() => {
       NextQuestion();
-    }, 1000);
+    }, 1500);
   };
 
   let _GetBackgroundColor = (index) => {
@@ -160,7 +160,7 @@ let QuestionsShow = (props) => {
           >
             <Animated.Text
               style={{
-                fontSize: 22,
+                fontSize: 18,
                 fontFamily: "CairoBold",
                 opacity: AnimationHideQuestion,
                 textAlign:'left'
@@ -175,7 +175,7 @@ let QuestionsShow = (props) => {
                 CheckAnswer(trg, index);
               }}
               key={index}
-              style={{ paddingVertical: 5 }}
+              style={{ paddingVertical: 3 }}
             >
               <Animated.View
                 style={{
@@ -191,7 +191,7 @@ let QuestionsShow = (props) => {
               <View
                 style={{
                   paddingHorizontal: 15,
-                  paddingVertical: 20,
+                  paddingVertical: 15,
                   borderTopColor: "#7e7e7e",
                   borderBottomWidth: 0.5,
                   borderBottomColor: "#7e7e7e",
