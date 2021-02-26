@@ -48,7 +48,7 @@ let StartTheQuestions = ({ changeToQuestions,questions,navigation }) => {
         
       </View>
       <LinearGradient // Button Linear Gradient
-        colors={[theme["color-info-500"], theme["color-danger-500"]]}
+        colors={[theme["color-success-500"], theme["color-warning-500"]]}
         start={{ x: 0.3, y: 0.2 }}
         end={{ x: 0.9, y: 0.6 }}
         style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -73,6 +73,7 @@ let StartTheQuestions = ({ changeToQuestions,questions,navigation }) => {
               }
             }}
             style={{ width: 120, height: 120, borderRadius: 60, marginTop: 15 }}
+            color="success"
           >
             {translate("questions.go")}
           </Button>

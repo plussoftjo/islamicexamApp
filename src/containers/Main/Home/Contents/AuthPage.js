@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { View, ScrollView, TouchableOpacity, Animated } from "react-native";
+import { View, ScrollView, TouchableOpacity, Animated, } from "react-native";
 import { Layout, Text, Button, useTheme } from "@ui-kitten/components";
 import { connect } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
@@ -61,15 +61,19 @@ let AuthPage = (props) => {
   };
 
   let Content = () => (
-    <View style={{ paddingTop: 20, paddingHorizontal: 15 }}>
-      <Text category="h5" style={{ color: theme["color-info-700"],textAlign:'left' }}>
+    <View style={{ paddingTop: 10, paddingHorizontal: 15 }}>
+      <Text
+        category="h5"
+        style={{ color: theme["color-info-700"], textAlign: "left" }}
+      >
         {translate("main.select_type")}
       </Text>
       <View
         style={{
           flexDirection: "row",
           alignItems: "center",
-          paddingVertical: 15,
+          paddingVertical: 5,
+          flexWrap: "wrap",
         }}
       >
         {categories.map((category, index) => (
@@ -77,12 +81,13 @@ let AuthPage = (props) => {
             key={index}
             style={{
               transform: [{ translateX: CategoriesBox }],
-              flex: 1,
-              paddingVertical: 30,
+              width: "45%",
+              paddingVertical: 15,
               marginHorizontal: 5,
               borderRadius: 10,
               borderColor: theme["color-info-500"],
               borderWidth: 1,
+              marginTop:5,
               backgroundColor:
                 selectedIndex == index
                   ? theme["color-info-600"]
@@ -114,13 +119,14 @@ let AuthPage = (props) => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
+          marginBottom:5
         }}
       >
         <Animated.View style={{ transform: [{ scale: StartBox }] }}>
           <Button
             onPress={StartTheQuestions}
             appearance="filled"
-            status="primary"
+            status="success"
             style={{ height: 100, width: 100, borderRadius: 50 }}
           >
             {translate("main.start")}
@@ -189,15 +195,18 @@ let AuthPage = (props) => {
     <Layout style={{ flex: 1 }}>
       <LinearGradient
         // Button Linear Gradient
-        colors={[theme["color-info-500"], theme["color-danger-500"]]}
+        colors={[theme["color-success-500"], theme["color-warning-500"]]}
         start={{ x: 0.3, y: 0.2 }}
         end={{ x: 0.9, y: 0.6 }}
         style={{ flex: 1 }}
       >
-        <Header translate={translate}  />
+      <ScrollView showsVerticalScrollIndicator={false}>
+      <Header translate={translate}  />
         <Content />
         <ResultsContent />
         <NotificationHandler/>
+      </ScrollView>
+        
       </LinearGradient>
     </Layout>
   );

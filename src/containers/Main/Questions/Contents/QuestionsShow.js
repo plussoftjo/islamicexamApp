@@ -25,7 +25,7 @@ let QuestionsShow = (props) => {
   } = props;
   let [correctAnswer, setCorrectAnswer] = React.useState(null);
   let [notCorrectAnswer, setNotCorrectAnswer] = React.useState(null);
-  let [adsShow,setAdsShow] = React.useState(3)
+  let [adsShow,setAdsShow] = React.useState(4)
 
   let _showAds = async() => {
     await AdMobInterstitial.setAdUnitID(Platform.OS == 'android'? Ads.android.QuestionsAds:Ads.ios.QuestionsAds); // Test ID, Replace with your-admob-unit-id
@@ -36,7 +36,7 @@ let QuestionsShow = (props) => {
   let NextQuestion = () => {
     if(adsShow == 0) {
       _showAds()
-      setAdsShow(5)
+      setAdsShow(6)
     }else {
       setAdsShow(adsShow - 1)
     }
@@ -126,7 +126,7 @@ let QuestionsShow = (props) => {
     <Layout style={{ flex: 1 }}>
       <LinearGradient
         // Button Linear Gradient
-        colors={[theme["color-info-500"], theme["color-danger-500"]]}
+        colors={[theme["color-success-500"], theme["color-warning-500"]]}
         start={{ x: 0.3, y: 0.2 }}
         end={{ x: 0.9, y: 0.6 }}
         style={{ flex: 1, flexDirection: "column" }}

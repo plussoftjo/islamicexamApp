@@ -1,13 +1,19 @@
 import React, { useRef } from "react";
-import { View, Platform, TouchableOpacity, Animated } from "react-native";
+import {
+  View,
+  Platform,
+  TouchableOpacity,
+  Animated,
+  ScrollView,
+} from "react-native";
 import { Layout, Text, Button, useTheme } from "@ui-kitten/components";
 import { connect } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
 import { SettingsActions } from "../../../../stores";
 import { Header, AuthContent } from "./NotAuth/index.js";
 import BottomSheet from "reanimated-bottom-sheet";
-import {translate} from '../../../../translations'
-import {NotificationHandler} from '../Components'
+import { translate } from "../../../../translations";
+import { NotificationHandler } from "../Components";
 let NotAuth = (props) => {
   /**
    * Props
@@ -26,7 +32,13 @@ let NotAuth = (props) => {
     navigation.navigate("Questions");
   };
 
-  let authContent = () => <AuthContent onInput={() => sheetRef.current.snapTo(0)} onOut={() => sheetRef.current.snapTo(1)} onComplete={() => sheetRef.current.snapTo(2)} />;
+  let authContent = () => (
+    <AuthContent
+      onInput={() => sheetRef.current.snapTo(0)}
+      onOut={() => sheetRef.current.snapTo(1)}
+      onComplete={() => sheetRef.current.snapTo(2)}
+    />
+  );
 
   /**
    * Content Animations ForCategories
@@ -40,8 +52,8 @@ let NotAuth = (props) => {
     }).start();
   };
 
-  let StartBox = useRef(new Animated.Value(0.5)).current
-  let StartBoxEnter = () =>{
+  let StartBox = useRef(new Animated.Value(0.5)).current;
+  let StartBoxEnter = () => {
     Animated.timing(StartBox, {
       toValue: 1.1,
       duration: 1000,
@@ -54,33 +66,36 @@ let NotAuth = (props) => {
         useNativeDriver: true,
       }).start();
     }, 1001);
-    
-  }
-
+  };
 
   let Content = () => (
-    <View style={{ paddingTop: 20, paddingHorizontal: 15 }}>
-      <Text category="h5" style={{ color: theme["color-info-700"],textAlign:'left' }}>
+    <View style={{ paddingTop: 10, paddingHorizontal: 15 }}>
+      <Text
+        category="h5"
+        style={{ color: theme["color-info-700"], textAlign: "left" }}
+      >
         {translate("main.select_type")}
       </Text>
       <View
         style={{
           flexDirection: "row",
           alignItems: "center",
-          paddingVertical: 15,
+          paddingVertical: 5,
+          flexWrap: "wrap",
         }}
       >
         {categories.map((category, index) => (
           <Animated.View
-              key={index}
+            key={index}
             style={{
-              transform: [{ translateX:CategoriesBox }],
-              flex: 1,
-              paddingVertical: 30,
+              transform: [{ translateX: CategoriesBox }],
+              width: "45%",
+              paddingVertical: 15,
               marginHorizontal: 5,
               borderRadius: 10,
               borderColor: theme["color-info-500"],
               borderWidth: 1,
+              marginTop:5,
               backgroundColor:
                 selectedIndex == index
                   ? theme["color-info-600"]
@@ -91,7 +106,7 @@ let NotAuth = (props) => {
               onPress={() => {
                 setSelectedIndex(index);
               }}
-              style={{width:'100%'}}
+              style={{ width: "100%" }}
             >
               <Text
                 category="s1"
@@ -114,33 +129,34 @@ let NotAuth = (props) => {
           justifyContent: "center",
         }}
       >
-      <Animated.View style={{transform:[{scale:StartBox}]}}>
-      <Button
-          onPress={StartTheQuestions}
-          appearance="filled"
-          status="primary"
-          style={{ height: 100, width: 100, borderRadius: 50 }}
-        >
-          {translate("main.start")}
-        </Button>
-      </Animated.View>
-        
+        <Animated.View style={{ transform: [{ scale: StartBox }] }}>
+          <Button
+            onPress={StartTheQuestions}
+            appearance="filled"
+            status="success"
+            style={{ height: 100, width: 100, borderRadius: 50 }}
+          >
+            {translate("main.start")}
+          </Button>
+        </Animated.View>
       </View>
     </View>
   );
 
-
-  let loginContentAnimation = useRef(new Animated.Value(0)).current
+  let loginContentAnimation = useRef(new Animated.Value(0)).current;
   let loginContentAnimationEnter = () => {
     Animated.timing(loginContentAnimation, {
       toValue: 1,
       duration: 1000,
       useNativeDriver: true,
     }).start();
-  }
+  };
   let LoginContent = () => (
-    <Animated.View style={{ padding: 15,opacity:loginContentAnimation }}>
-      <Text category="h5" style={{ color: theme["color-info-700"],textAlign:'left' }}>
+    <Animated.View style={{ padding: 15, opacity: loginContentAnimation }}>
+      <Text
+        category="h5"
+        style={{ color: theme["color-info-700"], textAlign: "left" }}
+      >
         {translate("main.do_you_want_register")}
       </Text>
       <View
@@ -166,34 +182,34 @@ let NotAuth = (props) => {
     </Animated.View>
   );
 
-
   React.useEffect(() => {
     CategoriesBoxEnter();
-    StartBoxEnter()
-    loginContentAnimationEnter()
+    StartBoxEnter();
+    loginContentAnimationEnter();
   }, []);
   return (
     <Layout style={{ flex: 1 }}>
       <LinearGradient
         // Button Linear Gradient
-        colors={[theme["color-info-500"], theme["color-danger-500"]]}
+        colors={[theme["color-success-500"], theme["color-warning-500"]]}
         start={{ x: 0.3, y: 0.2 }}
         end={{ x: 0.9, y: 0.6 }}
         style={{ flex: 1 }}
       >
-        <Header translate={translate} />
-        <Content />
-        <LoginContent />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Header translate={translate} />
+          <Content />
+          <LoginContent />
+          
+          {Platform.OS !== "web" && <NotificationHandler />}
+        </ScrollView>
         <BottomSheet
-          ref={sheetRef}
-          initialSnap={2}
-          snapPoints={[550, 450, 0]}
-          borderRadius={15}
-          renderContent={authContent}
-        />
-        {Platform.OS !== 'web' &&
-        <NotificationHandler/>
-        }
+            ref={sheetRef}
+            initialSnap={2}
+            snapPoints={[550, 450, 0]}
+            borderRadius={15}
+            renderContent={authContent}
+          />
       </LinearGradient>
     </Layout>
   );

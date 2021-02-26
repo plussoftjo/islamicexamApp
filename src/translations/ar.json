@@ -1,8 +1,8 @@
 {
     "main": {
-        "header": "مرحبا",
-        "sub_title": "في EM-Exam",
-        "select_type": "قم باختيار مستوى",
+        "header": "مرحبا بك",
+        "sub_title": "في اختبارات إسلامية",
+        "select_type": "قم بأختيار نوع الأختبار",
         "start": "أبدا",
         "do_you_want_register": "هل تريد التسجيل ؟",
         "last_result": "أخر النتائج",

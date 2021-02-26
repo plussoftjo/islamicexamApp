@@ -86,7 +86,7 @@ let Settings = (props) => {
     <Layout style={{ flex: 1 }}>
       <LinearGradient
         // Button Linear Gradient
-        colors={[theme["color-info-500"], theme["color-danger-500"]]}
+        colors={[theme["color-success-500"], theme["color-warning-500"]]}
         start={{ x: 0.3, y: 0.2 }}
         end={{ x: 0.9, y: 0.6 }}
         style={{ flex: 1 }}
